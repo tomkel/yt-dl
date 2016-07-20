@@ -1,2 +1,2 @@
-# youtube-dl-web-frontend
-A web frontend for youtube-dl
+# ytdl.js
+Browser module to get youtube videos.

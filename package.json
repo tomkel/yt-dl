@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/tomkel/ytdl.js/issues"
   },
-  "homepage": "https://github.com/tomkel/ytdl.js#readme"
+  "homepage": "https://github.com/tomkel/ytdl.js#readme",
+  "dependencies": {
+    "get-youtube-id": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
 }

@@ -61,10 +61,14 @@ function buildAbbr(ext, acodec, vcodec) {
   return `<abbr title="${title}">${ext}</abbr>`
 }
 
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 function buildLabel(format) {
   if (format.vcodec !== 'none') {
-    return `${format.format_note} ${buildAbbr(format.ext, format.acodec, format.vcodec)} ` +
-        `${format.resolution}`
+    return `${capitalizeFirstLetter(format.format_note)} ` +
+      `${buildAbbr(format.ext, format.acodec, format.vcodec)} ${format.resolution}`
   }
 
   return `Audio only ${buildAbbr(format.ext, format.acodec)} ${format.abr}kb/s`
@@ -101,7 +105,7 @@ function displayFormats(formats) {
     container = document.createElement('div')
   }
 
-  for (let format of formats) {
+  for (const format of formats) {
     container.appendChild(genFormat(format))
   }
   container.id = 'formats'

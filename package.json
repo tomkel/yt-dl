@@ -1,6 +1,6 @@
 {
   "name": "ytdl.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Browser module to get youtube videos.",
   "main": "index.js",
   "scripts": {

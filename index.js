@@ -15,7 +15,8 @@ function displayDownloadButton() {
 }
 
 function hideDownloadButton() {
-
+  const downloadAnchor = document.getElementById('download')
+  downloadAnchor.style.display = 'none'
 }
 
 function getMetadata(id) {
@@ -27,32 +28,107 @@ function getMetadata(id) {
 
     return res.json()
   })
+  .catch(e => {
+    // flash error message
+  })
+}
+
+function selectFormat() {
+  const url = document.getElementById('formatsParent').elements.format.value
+  const download = document.getElementById('download')
+  download.href = url
+  download.download = 'filename'
+  displayDownloadButton()
+}
+
+function cleanCodec(codec) {
+  let result = codec.trim()
+  const dotIndex = result.indexOf('.')
+  if (dotIndex !== -1) {
+    result = result.substring(0, dotIndex)
+  }
+  return result
+}
+
+function buildAbbr(ext, acodec, vcodec) {
+  let title
+  if (vcodec) {
+    title = `${cleanCodec(vcodec)}/${cleanCodec(acodec)}`
+  } else {
+    title = `${cleanCodec(acodec)}`
+  }
+
+  return `<abbr title="${title}">${ext}</abbr>`
+}
+
+function buildLabel(format) {
+  if (format.vcodec !== 'none') {
+    return `${format.format_note} ${buildAbbr(format.ext, format.acodec, format.vcodec)} ` +
+        `${format.resolution}`
+  }
+
+  return `Audio only ${buildAbbr(format.ext, format.acodec)} ${format.abr}kb/s`
 }
 
 function genFormat(format) {
+  const container = document.createElement('div')
+  const input = document.createElement('input')
+  input.type = 'radio'
+  input.name = 'format'
+  input.value = format.url
+  input.addEventListener('change', selectFormat)
 
+  const label = document.createElement('label')
+  label.innerHTML = buildLabel(format)
+
+  container.appendChild(input)
+  container.appendChild(label)
+  return container
+}
+
+function removeFormats() {
+  const container = document.getElementById('formats')
+  if (!container) return
+  while (container.lastChild) {
+    container.removeChild(container.lastChild)
+  }
 }
 
 function displayFormats(formats) {
-  const container = document.createElement('div')
-  for (const format of formats) {
-    genFormat(format)
+  console.log(formats)
+  let container = document.getElementById('formats')
+  if (!container) {
+    container = document.createElement('div')
   }
 
-  document.getElementById('main').appendChild(container)
+  for (let format of formats) {
+    container.appendChild(genFormat(format))
+  }
+  container.id = 'formats'
+
+  document.getElementById('formatsParent').appendChild(container)
 }
 
-function displayDownloadButton(format) {
-  displayDownloadButton()
-  const downloadAnchor = document.getElementById('download')
-  downloadAnchor.href = format.url
-  downloadAnchor.setAttribute('download', 'blah')
+function displayTitle(metadata) {
+
+  return metadata.formats
 }
 
+function urlHandler() {
+  const url = document.getElementById('url').value
+  const id = getYouTubeID(url)
+  console.log(id)
+  if (id) {
+    hideDownloadButton()
+    removeFormats()
+
+    getMetadata(id)
+      .then(displayTitle)
+      .then(displayFormats)
+  }
+}
 
 function initEvents() {
-  document.getElementById('url').addEventListener('change', ev => {
-    const id = getYouTubeID('http://www.youtube.com/watch?v=9bZkp7q19f0')
-    if (id) getMetadata(id).then(displayFormats) 
-  })
+  document.getElementById('url').addEventListener('change', urlHandler)
 }
+initEvents()

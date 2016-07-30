@@ -133,6 +133,6 @@ function urlHandler() {
 }
 
 function initEvents() {
-  document.getElementById('url').addEventListener('change', urlHandler)
+  document.getElementById('url').addEventListener('input', urlHandler)
 }
 initEvents()

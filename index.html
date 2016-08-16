@@ -2,8 +2,6 @@
 <meta charset="utf-8">
 <title>Youtube-dl</title>
 
-<link rel="stylesheet" href="index.css">
-
 <header>
   <image src="logo.png"></image>
 </header>
@@ -11,8 +9,12 @@
 <section id="main">
   <h1>Enter a youtube URL</h1>
   <input type="text" id="url"></input>
+
+  <div id="spinner"></div>
+
   <!-- formatsParent is necessary to insert into a specific place -->
-  <fieldset id="formatsParent"></fieldset>
+  <fieldset id="formatsParent">
+  </fieldset>
 
   <a id="download">Download</a>
 </section>
@@ -20,4 +22,4 @@
 <footer>
 </footer>
 
-<script src="out.js"></script>
+<script src="bundle.js"></script>

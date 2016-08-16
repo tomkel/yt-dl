@@ -1,4 +1,5 @@
-const getYouTubeID = require('get-youtube-id')
+import getYouTubeID from 'get-youtube-id'
+import './index.css'
 
 /*
  * private -> ERROR: 3hXcOKV_Z3I: YouTube said: Please sign in to view this video.
@@ -17,6 +18,15 @@ function displayDownloadButton() {
 function hideDownloadButton() {
   const downloadAnchor = document.getElementById('download')
   downloadAnchor.style.display = 'none'
+}
+
+function toggleSpinner() {
+  const spinner = document.getElementById('spinner')
+  if (spinner.style.display) {
+    spinner.style.display = 'none'
+  } else {
+    spinner.style.display = 'block'
+  }
 }
 
 function getMetadata(id) {
@@ -76,6 +86,7 @@ function buildLabel(format) {
 
 function genFormat(format) {
   const container = document.createElement('div')
+
   const input = document.createElement('input')
   input.type = 'radio'
   input.name = 'format'
@@ -87,6 +98,7 @@ function genFormat(format) {
 
   container.appendChild(input)
   container.appendChild(label)
+  setTimeout(() => container.classList.add('show'), 10)
   return container
 }
 
@@ -103,6 +115,7 @@ function displayFormats(formats) {
   let container = document.getElementById('formats')
   if (!container) {
     container = document.createElement('div')
+    container.classList.add('slide-fade')
   }
 
   for (const format of formats) {
@@ -114,6 +127,7 @@ function displayFormats(formats) {
 }
 
 function displayTitle(metadata) {
+  toggleSpinner()
 
   return metadata.formats
 }
@@ -125,6 +139,7 @@ function urlHandler() {
   if (id) {
     hideDownloadButton()
     removeFormats()
+    toggleSpinner()
 
     getMetadata(id)
       .then(displayTitle)

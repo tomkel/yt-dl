@@ -172,11 +172,15 @@ function urlHandler() {
       console.log(e)
       const flash = document.getElementById('flash')
       flash.innerText = String(e)
+      flash.style.visibility = 'visible'
       flash.classList.toggle('flash-visible')
 
-      setTimeout(() =>
+      setTimeout(() => {
         flash.classList.toggle('flash-visible')
-      , 2000)
+        setTimeout(() => {
+          flash.style.visibility = 'hidden'
+        }, 1000)
+      }, 2000)
     })
   }
 }

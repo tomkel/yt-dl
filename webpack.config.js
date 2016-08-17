@@ -1,9 +1,12 @@
+const path = require('path')
 const cssnext = require('postcss-cssnext')
+
+const DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   entry: './index.js',
   output: {
-    path: __dirname,
+    path: path.join(__dirname, 'dist/'),
     filename: 'bundle.js',
   },
   module: {
@@ -19,19 +22,14 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: 'style!css?sourceMap!postcss?sourceMap=inline',
+        loader: DEV ? 'style!css?sourceMap!postcss?sourceMap=inline' : 'style!css!postcss?compress',
       },
       {
         test: /\.css$/,
         include: /node_modules/,
-        loader: 'style!css?sourceMap',
+        loader: DEV ? 'style!css?sourceMap' : 'style!css?minimize&-autoprefixer',
       },
     ],
   },
   postcss: () => [cssnext],
-  devServer: {
-    inline: true,
-  },
-  devtool: 'source-map',
-  debug: true,
 }

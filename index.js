@@ -1,4 +1,5 @@
 import getYouTubeID from 'get-youtube-id'
+import 'normalize.css'
 import './index.css'
 
 /*
@@ -22,11 +23,18 @@ function hideDownloadButton() {
 
 function toggleSpinner() {
   const spinner = document.getElementById('spinner')
-  if (spinner.style.display) {
+  if (spinner.style.display === 'block') {
     spinner.style.display = 'none'
   } else {
     spinner.style.display = 'block'
   }
+}
+
+function triggerPopAnimation(elem) {
+  elem.classList.remove('hvr-pop-activate')
+  // trigger a reflow
+  void elem.offsetWidth
+  elem.classList.add('hvr-pop-activate')
 }
 
 function getMetadata(id) {
@@ -38,9 +46,6 @@ function getMetadata(id) {
 
     return res.json()
   })
-  .catch(e => {
-    // flash error message
-  })
 }
 
 function selectFormat() {
@@ -49,6 +54,7 @@ function selectFormat() {
   download.href = url
   download.download = 'filename'
   displayDownloadButton()
+  triggerPopAnimation(download)
 }
 
 function cleanCodec(codec) {
@@ -108,6 +114,7 @@ function removeFormats() {
   while (container.lastChild) {
     container.removeChild(container.lastChild)
   }
+  document.getElementById('formatsParent').style.visibility = ''
 }
 
 function displayFormats(formats) {
@@ -123,11 +130,25 @@ function displayFormats(formats) {
   }
   container.id = 'formats'
 
-  document.getElementById('formatsParent').appendChild(container)
+  const formatsParent = document.getElementById('formatsParent')
+  formatsParent.style.visibility = 'visible'
+  formatsParent.appendChild(container)
+}
+
+function removeTitle() {
+  const title = document.getElementById('title')
+  if (!title) return
+  title.parentNode.removeChild(title)
 }
 
 function displayTitle(metadata) {
   toggleSpinner()
+
+  const title = document.createElement('h3')
+  title.id = 'title'
+  title.className = 'title'
+  title.innerText = metadata.title
+  document.getElementById('formatsParent').appendChild(title)
 
   return metadata.formats
 }
@@ -138,12 +159,25 @@ function urlHandler() {
   console.log(id)
   if (id) {
     hideDownloadButton()
+    removeTitle()
     removeFormats()
     toggleSpinner()
 
     getMetadata(id)
       .then(displayTitle)
       .then(displayFormats)
+    .catch(e => {
+      toggleSpinner()
+      // flash error message
+      console.log(e)
+      const flash = document.getElementById('flash')
+      flash.innerText = String(e)
+      flash.classList.toggle('flash-visible')
+
+      setTimeout(() =>
+        flash.classList.toggle('flash-visible')
+      , 2000)
+    })
   }
 }
 

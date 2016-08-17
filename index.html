@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Youtube-dl</title>
+<title>YouTube Download</title>
+
+<div class="flash-parent">
+</div>
 
 <header>
-  <image src="logo.png"></image>
+  <a href="/"><img src="logo.png" alt="logo" class="logo"></a>
 </header>
 
 <section id="main">
-  <h1>Enter a youtube URL</h1>
-  <input type="text" id="url"></input>
+  <h1>Enter a YouTube URL</h1>
+  <input type="text" id="url">
 
   <div id="spinner"></div>
 
   <!-- formatsParent is necessary to insert into a specific place -->
-  <fieldset id="formatsParent">
-  </fieldset>
+  <fieldset id="formatsParent"></fieldset>
 
-  <a id="download">Download</a>
+  <a id="download" class="hvr-pop hvr-pop-activate">Download</a>
+
+  <div id="flash" class="flash">soathusthoaesnu</div>
 </section>
 
 <footer>
+  Made with <span class="heart"></span> by <a class="footer-name" href="/">Thomas Kelly</a>
 </footer>
 
 <script src="bundle.js"></script>

@@ -1,4 +1,4 @@
-const autoprefixer = require('autoprefixer')
+const cssnext = require('postcss-cssnext')
 
 module.exports = {
   entry: './index.js',
@@ -16,10 +16,19 @@ module.exports = {
           presets: ['es2015'],
         },
       },
-      { test: /\.css$/, loader: 'style!css?sourceMap!postcss?sourceMap=inline' },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style!css?sourceMap!postcss?sourceMap=inline',
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: 'style!css?sourceMap',
+      },
     ],
   },
-  postcss: () => [autoprefixer],
+  postcss: () => [cssnext],
   devServer: {
     inline: true,
   },

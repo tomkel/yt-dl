@@ -1,9 +1,161 @@
-#main {
+@import 'https://fonts.googleapis.com/css?family=Rubik:400,700';
 
+:root {
+  --redAccent: #e62117;
+  --grayMain: #f1f1f1;
+  --blackText: #121212;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--grayMain);
+  color: var(--redAccent);
+  font-family: 'Rubik', sans-serif;
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+#main {
+  text-align: center;
+  height: 85%;
+  position: relative;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+#main > input {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: var(--blackText);
+  width: 55%;
+  max-width: 414px;
+}
+
+#formatsParent {
+  visibility: hidden;
+  background-color: #fff;
+  margin: 3rem 10%;
+  padding-top: 1px;
+  padding-bottom: 1rem;
+  border: 0;
+  border-radius: 1rem;
+}
+
+h3.title {
+  font-size: 1.5em;
+}
+
+#formats {
+  color: var(--blackText);
+  text-align: left;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+#formats input {
+  margin-right: 1rem;
+}
+
+abbr {
+  cursor: help;
 }
 
 #download {
   display: none;
+  font-size: 1.4em;
+  background-color: var(--redAccent);
+  color: var(--grayMain);
+  text-decoration: none;
+  width: 15rem;
+  height: 3.5rem;
+  line-height: 3.3rem;
+  margin: 0 auto;
+  border-radius: 1rem;
+}
+
+#download:hover {
+  background-color: color(var(--redAccent) saturation(+40%));
+}
+
+footer {
+  text-align: center;
+  color: var(--blackText);
+}
+
+.heart::before {
+  content: '\2665';
+  color: var(--redAccent);
+  font-size: 1.5em;
+}
+
+.footer-name {
+  color: var(--redAccent);
+  text-decoration: none;
+}
+
+.footer-name:hover {
+  color: color(var(--redAccent) lightness(+15%));
+}
+
+.flash {
+  background-color: var(--redAccent);
+  color: #fff;
+  font-weight: bold;
+  line-height: 2.5em;
+  word-wrap: break-word;
+  border-radius: 1rem;
+
+  width: 300px;
+  height: 50px;
+  padding: 20px;
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;
+
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.flash-visible {
+  opacity: 0.4;
+}
+
+/* https://github.com/IanLunn/Hover */
+
+@keyframes hvr-pop {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.hvr-pop {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hvr-pop-activate {
+  animation-name: hvr-pop;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
 }
 
 /* https://github.com/tobiasahlin/SpinKit */
@@ -12,7 +164,7 @@
   width: 40px;
   height: 40px;
   margin: 100px auto;
-  background-color: #333;
+  background-color: var(--redAccent);
   display: none;
 
   border-radius: 100%;

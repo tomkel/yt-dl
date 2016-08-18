@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --progress -d --inline --hot",
-    "build": "NODE_ENV=production webpack --progress -p"
+    "build": "NODE_ENV=production webpack --progress -p",
+    "deploy": "fish deploy.fish"
   },
   "repository": {
     "type": "git",

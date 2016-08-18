@@ -38,7 +38,7 @@ function triggerPopAnimation(elem) {
 }
 
 function getMetadata(id) {
-  return fetch(`http://localhost:5000/metadata/${id}`)
+  return fetch(`/metadata/${id}`)
   .then(res => {
     if (!res.ok) {
       return res.text().then(text => Promise.reject(text))

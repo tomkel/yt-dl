@@ -146,7 +146,8 @@ function displayTitle(metadata) {
 
   const title = document.createElement('h3')
   title.id = 'title'
-  title.className = 'title'
+  title.classList.add('title')
+  title.classList.add('slide-fade')
   title.innerText = metadata.title
   document.getElementById('formatsParent').appendChild(title)
 

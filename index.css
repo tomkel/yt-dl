@@ -197,22 +197,26 @@ footer {
  * https://cssanimation.rocks/list-items/
  */
 
-#formats div {
+#formats div,
+#title {
   height: 0;
   margin: 0;
   overflow: hidden;
 }
 
-#formats div.show {
+#formats div.show,
+#title.show {
   height: 2em;
   margin: 2px 0;
 }
 
-.slide-fade div {
+.slide-fade div,
+#title {
   transition: all 0.4s ease-out;
   opacity: 0;
 }
 
-.slide-fade div.show {
+.slide-fade div.show,
+#title.show {
   opacity: 1;
 }

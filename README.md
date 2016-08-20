@@ -1,4 +1,2 @@
 # yt-dl
-Browser module to download youtube videos and audio.
-
-Backend powered by [tomkel/flask-youtube-metadata](https://github.com/tomkel/flask-youtube-metadata).
+Web frontend for [tomkel/flask-youtube-metadata](https://github.com/tomkel/flask-youtube-metadata). Enables downloading youtube videos and audio.

@@ -204,10 +204,14 @@ footer {
   overflow: hidden;
 }
 
-#formats div.show,
-#title.show {
+#formats div.show {
   height: 2em;
   margin: 2px 0;
+}
+
+#title.show {
+  height: auto;
+  margin: 1rem 0;
 }
 
 .slide-fade div,

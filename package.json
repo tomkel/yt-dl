@@ -26,8 +26,10 @@
   "devDependencies": {
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.5",
+    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.13.2",
     "css-loader": "^0.25.0",
+    "isomorphic-fetch": "^2.2.1",
     "postcss-cssnext": "^2.7.0",
     "postcss-loader": "^0.13.0",
     "style-loader": "^0.13.1",

@@ -4,7 +4,7 @@ const cssnext = require('postcss-cssnext')
 const DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
-  entry: './index.js',
+  entry: ['babel-polyfill', 'isomorphic-fetch', './index.js'],
   output: {
     path: path.join(__dirname, 'dist/'),
     filename: 'bundle.js',

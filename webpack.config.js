@@ -1,5 +1,6 @@
 const path = require('path')
 const cssnext = require('postcss-cssnext')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const DEV = process.env.NODE_ENV !== 'production'
 
@@ -32,4 +33,11 @@ module.exports = {
     ],
   },
   postcss: () => [cssnext],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: true,
+      hash: true,
+    }),
+  ],
 }

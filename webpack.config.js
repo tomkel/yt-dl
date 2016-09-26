@@ -1,6 +1,7 @@
 const path = require('path')
 const cssnext = require('postcss-cssnext')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const DEV = process.env.NODE_ENV !== 'production'
 
@@ -8,7 +9,7 @@ module.exports = {
   entry: ['babel-polyfill', 'isomorphic-fetch', './index.js'],
   output: {
     path: path.join(__dirname, 'dist/'),
-    filename: 'bundle.js',
+    filename: 'bundle.[hash].js',
   },
   module: {
     loaders: [
@@ -39,5 +40,6 @@ module.exports = {
       inject: true,
       hash: true,
     }),
+    new CleanWebpackPlugin('./dist'),
   ],
 }

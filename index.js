@@ -49,7 +49,7 @@ function getMetadata(id) {
 }
 
 function selectFormat() {
-  const url = document.getElementById('formatsParent').elements.format.value
+  const url = document.querySelector('input:checked').value
   const download = document.getElementById('download')
   download.href = url
   download.download = 'filename'

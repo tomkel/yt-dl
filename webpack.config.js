@@ -1,6 +1,7 @@
 const path = require('path')
 const cssnext = require('postcss-cssnext')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const DEV = process.env.NODE_ENV !== 'production'
@@ -24,12 +25,12 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: DEV ? 'style!css?sourceMap!postcss?sourceMap=inline' : 'style!css!postcss?compress',
+        loader: ExtractTextPlugin.extract(DEV ? 'css?sourceMap!postcss?sourceMap=inline' : 'css!postcss?compress'),
       },
       {
         test: /\.css$/,
         include: /node_modules/,
-        loader: DEV ? 'style!css?sourceMap' : 'style!css?minimize&-autoprefixer',
+        loader: ExtractTextPlugin.extract(DEV ? 'css?sourceMap' : 'css?minimize&-autoprefixer'),
       },
     ],
   },
@@ -40,6 +41,7 @@ module.exports = {
       inject: true,
       hash: true,
     }),
+    new ExtractTextPlugin('styles.css'),
     new CleanWebpackPlugin('./dist'),
   ],
 }

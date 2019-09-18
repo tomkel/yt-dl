@@ -84,7 +84,7 @@ function capitalizeFirstLetter(str) {
 function buildLabel(format) {
   if (format.vcodec !== 'none') {
     return `${capitalizeFirstLetter(format.format_note)} ` +
-      `${buildAbbr(format.ext, format.acodec, format.vcodec)} ${format.resolution}`
+      `${buildAbbr(format.ext, format.acodec, format.vcodec)} ${format.width}x${format.height}`
   }
 
   return `Audio only ${buildAbbr(format.ext, format.acodec)} ${format.abr}kb/s`
